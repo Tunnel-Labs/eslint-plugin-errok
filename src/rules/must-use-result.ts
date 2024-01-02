@@ -23,7 +23,7 @@ const resultProperties = [
 	'unwrapOr'
 ];
 
-const handledMethods = ['match', 'unwrapOr', '_unsafeUnwrap', 'unwrap'];
+const handledMethods = ['match', 'unwrapOr', '_unsafeUnwrap', 'unwrap', 'isErr'];
 
 function isResultLike(
 	checker: TypeChecker,
@@ -72,8 +72,8 @@ function isHandledResult(node: TSESTree.Node): boolean {
 	}
 	return false;
 }
-const endTransverse = ['BlockStatement', 'Program'];
-function getAssignation(
+const endTraverse = ['BlockStatement', 'Program'];
+function getAssignedTo(
 	checker: TypeChecker,
 	parserServices: ParserServices,
 	node: TSESTree.Node
@@ -85,10 +85,10 @@ function getAssignation(
 	) {
 		return node.id;
 	}
-	if (endTransverse.includes(node.type) || !node.parent) {
+	if (endTraverse.includes(node.type) || !node.parent) {
 		return undefined;
 	}
-	return getAssignation(checker, parserServices, node.parent);
+	return getAssignedTo(checker, parserServices, node.parent);
 }
 
 function isReturned(
@@ -154,7 +154,7 @@ function processSelector(
 		return false;
 	}
 
-	const assignedTo = getAssignation(checker, parserServices, node);
+	const assignedTo = getAssignedTo(checker, parserServices, node);
 	const currentScope = context.getScope();
 
 	// Check if is assigned

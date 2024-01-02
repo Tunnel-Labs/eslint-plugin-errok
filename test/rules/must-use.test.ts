@@ -42,6 +42,13 @@ ruleTester.run('must-use-result', rule, {
 			`
 		),
 		injectResult(
+			'Result: call isErr',
+			outdent`
+				const result = getResult()
+				result.isErr()
+			`
+		),
+		injectResult(
 			'ResultAsync: call unwrap',
 			outdent`
 				const resultAsync = getResultAsync()
