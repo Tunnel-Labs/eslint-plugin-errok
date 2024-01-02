@@ -45,7 +45,7 @@ ruleTester.run('must-use-result', rule, {
 			'Result: call isErr',
 			outdent`
 				const result = getResult()
-				result.isErr()
+				if (result.isErr()) {}
 			`
 		),
 		injectResult(

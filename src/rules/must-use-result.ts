@@ -23,7 +23,13 @@ const resultProperties = [
 	'unwrapOr'
 ];
 
-const handledMethods = ['match', 'unwrapOr', '_unsafeUnwrap', 'unwrap', 'isErr'];
+const handledMethods = [
+	'match',
+	'unwrapOr',
+	'_unsafeUnwrap',
+	'unwrap',
+	'isErr'
+];
 
 function isResultLike(
 	checker: TypeChecker,
@@ -159,19 +165,22 @@ function processSelector(
 
 	// Check if is assigned
 	if (assignedTo) {
-		const variable = currentScope.set.get(assignedTo.name);
-		const references =
-			variable?.references.filter((ref) => ref.identifier !== assignedTo) ?? [];
-		if (references.length > 0) {
-			return references.some((ref) =>
-				processSelector(
-					context,
-					checker,
-					parserServices,
-					ref.identifier,
-					reportAs
-				)
-			);
+		for (const scope of [currentScope, ...currentScope.childScopes]) {
+			const variable = scope.set.get(assignedTo.name);
+			const references =
+				variable?.references.filter((ref) => ref.identifier !== assignedTo) ??
+				[];
+			if (references.length > 0) {
+				return references.some((ref) =>
+					processSelector(
+						context,
+						checker,
+						parserServices,
+						ref.identifier,
+						reportAs
+					)
+				);
+			}
 		}
 	}
 
