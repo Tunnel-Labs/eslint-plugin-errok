@@ -17,6 +17,7 @@ function injectResult(name: string, text: string) {
 			${neverthrowTypes}
 			declare function getResult(): Result<string, Error>
 			declare function getResultAsync(): ResultAsync<string, Error>
+			declare function getResultPromise(): Promise<Result<string, Error>>
 			declare function getNormal(): number
 			const obj: { get: () => Result<string, Error>, getAsync: () => ResultAsync<string, Error> }
 		` + text
@@ -34,28 +35,35 @@ const ruleTester = new RuleTester({
 ruleTester.run('must-use-result', rule, {
 	valid: [
 		injectResult(
-			'call unwrap',
+			'Result: call unwrap',
 			outdent`
 				const result = getResult()
 				result.unwrap()
 			`
 		),
 		injectResult(
-			'call ResultAsync unwrap',
+			'ResultAsync: call unwrap',
 			outdent`
 				const resultAsync = getResultAsync()
 				resultAsync.unwrap()
 			`
 		),
 		injectResult(
-			'call unwrapOr after some methods',
+			'ResultPromise: call unwrap',
+			outdent`
+				const result = await getResultPromise()
+				result.unwrap()
+			`
+		),
+		injectResult(
+			'Result: call unwrapOr after some methods',
 			outdent`
 				const result = getResult()
 				result.map(() => {}).unwrapOr('')
 			`
 		),
 		injectResult(
-			'Call match',
+			'Result: call match',
 			outdent`
 				const result = getResult()
 				result.match(() => {}, () => {})
@@ -89,9 +97,18 @@ ruleTester.run('must-use-result', rule, {
 	invalid: [
 		{
 			code: injectResult(
-				'only assignment',
+				'Result: only assignment',
 				outdent`
 					const result = getResult()
+				`
+			),
+			errors: [{ messageId: MessageIds.MUST_USE }]
+		},
+		{
+			code: injectResult(
+				'ResultPromise: only assignment',
+				outdent`
+					const result = await getResultPromise()
 				`
 			),
 			errors: [{ messageId: MessageIds.MUST_USE }]

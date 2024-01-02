@@ -9,6 +9,7 @@ function matchAny(nodeTypes: string[]) {
 }
 const resultSelector = matchAny([
 	// 'Identifier',
+	'AwaitExpression',
 	'CallExpression',
 	'NewExpression'
 ]);
@@ -130,6 +131,14 @@ function processSelector(
 	if (node.parent?.type.startsWith('TS')) {
 		return false;
 	}
+
+	// We skip handling the inner `CallExpression` to avoid duplicated errors
+	if (
+		node.type === AST_NODE_TYPES.CallExpression &&
+		node.parent.type === AST_NODE_TYPES.AwaitExpression
+	) {
+		return false;
+	}
 	if (node.parent && ignoreParents.includes(node.parent.type)) {
 		return false;
 	}
@@ -183,7 +192,7 @@ const rule: TSESLint.RuleModule<MessageIds, []> = {
 		},
 		messages: {
 			mustUseResult:
-				'Result must be handled with either of match, unwrapOr or _unsafeUnwrap.'
+				'Result must be handled with either of `match`, `unwrapOr` or `unwrap`.'
 		},
 		schema: [],
 		type: 'problem'
@@ -195,7 +204,7 @@ const rule: TSESLint.RuleModule<MessageIds, []> = {
 
 		if (checker === undefined) {
 			throw Error(
-				'types not available, maybe you need to set the parser to "@typescript-eslint/parser"'
+				'Types not available; make sure the "parser" option is set to "@typescript-eslint/parser"'
 			);
 		}
 
