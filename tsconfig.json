@@ -1,0 +1,26 @@
+{
+	"compilerOptions": {
+		"target": "ES2015",
+		"module": "Node16",
+		"rootDir": ".",
+		"outDir": "dist",
+		"declaration": false,
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"moduleResolution": "Node16",
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true
+	},
+	"include": [
+		"src",
+		"test"
+	],
+	"exclude": [
+		".prettierrc.js",
+		"node_modules"
+	]
+}
