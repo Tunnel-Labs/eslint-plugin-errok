@@ -1,31 +1,32 @@
-# eslint-plugin-neverthrow
+# @tunnel/eslint-plugin-neverthrow
 
-[![npm version](https://img.shields.io/npm/v/eslint-plugin-neverthrow.svg)](https://www.npmjs.com/package/eslint-plugin-neverthrow)
-[![Downloads/month](https://img.shields.io/npm/dm/eslint-plugin-neverthrow.svg)](http://www.npmtrends.com/eslint-plugin-neverthrow)
+This ESLint plugin is a fork of @mdbetancourt's excellent [eslint-plugin-neverthrow](https://github.com/mdbetancourt/eslitn-plugin-neverthrow) library.
 
 ## Installation
 
-Use [npm](https://www.npmjs.com/) or a compatible tool to install.
+Install `@tunnel/eslint-plugin-neverthrow` using your favorite package manager:
 
-```bash
-npm install --save-dev eslint eslint-plugin-neverthrow @typescript-eslint/parser
+```shell
+npm install --save-dev eslint-plugin-neverthrow
 ```
 
 ### Requirements
 
-- Node.js v8.10.0 or newer versions.
-- ESLint v5.16.0 or newer versions.
-- @typescript-eslint/parser
+- Node.js LTS
+- ESLint (v8 or higher)
+- @typescript-eslint/parser (v6 or higher)
 
 ## Usage
 
-Write your config file such as `.eslintrc.js`.
+Add `@tunnel/neverthrow` to the `plugins` section of your ESLint config file:
 
 ```js
+// .eslintrc.cjs
+
 module.exports = {
-  plugins: ['neverthrow'],
+  plugins: ['@tunnel/neverthrow'],
   rules: {
-    'neverthrow/must-use-result': 'error',
+    '@tunnel/neverthrow/must-use-result': 'error',
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -41,7 +42,7 @@ See also [Configuring ESLint](https://eslint.org/docs/user-guide/configuring).
 
 ## Configs
 
-- `neverthrow/recommended` ... enables the recommended rules.
+- `@tunnel/neverthrow/recommended` ... enables the recommended rules.
 
 ## Rules
 
@@ -51,28 +52,6 @@ See also [Configuring ESLint](https://eslint.org/docs/user-guide/configuring).
 
 | Rule ID                                                       | Description                                                                                |     |
 | :------------------------------------------------------------ | :----------------------------------------------------------------------------------------- | :-: |
-| [neverthrow/must-use-result](./docs/rules/must-use-result.md) | Not handling neverthrow result is a possible error because errors could remain unhandled. | ⭐️ |
+| [@tunnel/neverthrow/must-use-result](./docs/rules/must-use-result.md) | Not handling neverthrow result is a possible error because errors could remain unhandled. | ⭐️ |
 
 <!--RULE_TABLE_END-->
-
-## Semantic Versioning Policy
-
-This plugin follows [Semantic Versioning](http://semver.org/) and [ESLint's Semantic Versioning Policy](https://github.com/eslint/eslint#semantic-versioning-policy).
-
-## Changelog
-
-- [GitHub Releases](https://github.com/mdbetancourt/eslint-plugin-neverthrow/releases)
-
-## Contributing
-
-Welcome your contribution!
-
-See also [ESLint Contribution Guide](https://eslint.org/docs/developer-guide/contributing/).
-
-### Development Tools
-
-- `npm test` runs tests.
-- `npm run update` updates the package version. And it updates `src/configs/recommended.ts`, `lib/index.ts`, and `README.md`'s rule table. See also [npm version CLI command](https://docs.npmjs.com/cli/version).
-- `npm run add-rule <RULE_ID>` creates three files to add a new rule.
-
-**forked from [mysticatea/template-eslint-plugin](https://github.com/mysticatea/template-eslint-plugin)**
