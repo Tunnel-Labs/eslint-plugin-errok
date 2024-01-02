@@ -1,6 +1,6 @@
 # @tunnel/eslint-plugin-neverthrow
 
-This ESLint plugin is a fork of @mdbetancourt's excellent [eslint-plugin-neverthrow](https://github.com/mdbetancourt/eslitn-plugin-neverthrow) library.
+This ESLint plugin is a fork of the excellent [eslint-plugin-neverthrow](https://github.com/mdbetancourt/eslitn-plugin-neverthrow) package by @mdbetancourt.
 
 ## Installation
 
