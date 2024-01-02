@@ -1,6 +1,6 @@
 {
-  "name": "eslint-plugin-neverthrow",
-  "version": "0.0.0-development",
+  "name": "@tunnel/eslint-plugin-neverthrow",
+  "version": "0.0.0",
   "description": "",
   "engines": {
     "node": ">=14.17"
