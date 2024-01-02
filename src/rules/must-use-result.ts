@@ -164,24 +164,28 @@ function processSelector(
 	const currentScope = context.getScope();
 
 	// Check if is assigned
+	const references = [];
 	if (assignedTo) {
 		for (const scope of [currentScope, ...currentScope.childScopes]) {
 			const variable = scope.set.get(assignedTo.name);
-			const references =
-				variable?.references.filter((ref) => ref.identifier !== assignedTo) ??
-				[];
-			if (references.length > 0) {
-				return references.some((ref) =>
-					processSelector(
-						context,
-						checker,
-						parserServices,
-						ref.identifier,
-						reportAs
-					)
-				);
-			}
+			references.push(
+				...(variable?.references.filter(
+					(ref) => ref.identifier !== assignedTo
+				) ?? [])
+			);
 		}
+	}
+
+	if (references.length > 0) {
+		return references.some((ref) =>
+			processSelector(
+				context,
+				checker,
+				parserServices,
+				ref.identifier,
+				reportAs
+			)
+		);
 	}
 
 	context.report({
