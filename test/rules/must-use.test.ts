@@ -47,8 +47,25 @@ ruleTester.run('must-use-result', rule, {
 				const result = getResult();
 				if (result.isErr()) {
 				}
-
-				result.value
+			`
+		),
+		injectResult(
+			'Result: call isErr and access .value',
+			outdent`
+				const result = getResult();
+				if (result.isErr()) {
+				} else {
+					result.value
+				}
+			`
+		),
+		injectResult(
+			'Result: call isErr and access .error',
+			outdent`
+				const result = getResult();
+				if (result.isErr()) {
+					result.error
+				}
 			`
 		),
 		injectResult(

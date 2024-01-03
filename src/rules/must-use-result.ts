@@ -79,11 +79,11 @@ function isHandledResult(node: TSESTree.Node): boolean {
 	return false;
 }
 
-function isValuePropertyAccessed(node: TSESTree.Node): boolean {
+function isInnerPropertyAccessed(node: TSESTree.Node): boolean {
 	const memberExpression = node.parent;
 	if (memberExpression?.type === AST_NODE_TYPES.MemberExpression) {
 		const propertyName = findMemberName(memberExpression);
-		if (propertyName === 'value') {
+		if (propertyName === 'value' || propertyName === 'error') {
 			return true;
 		}
 	}
@@ -171,7 +171,7 @@ function processSelector(
 		return false;
 	}
 
-	if (isValuePropertyAccessed(node)) {
+	if (isInnerPropertyAccessed(node)) {
 		return false;
 	}
 
