@@ -78,6 +78,19 @@ function isHandledResult(node: TSESTree.Node): boolean {
 	}
 	return false;
 }
+
+function isValuePropertyAccessed(node: TSESTree.Node): boolean {
+	const memberExpression = node.parent;
+	if (memberExpression?.type === AST_NODE_TYPES.MemberExpression) {
+		const propertyName = findMemberName(memberExpression);
+		if (propertyName === 'value') {
+			return true;
+		}
+	}
+
+	return false
+}
+
 const endTraverse = ['BlockStatement', 'Program'];
 function getAssignedTo(
 	checker: TypeChecker,
@@ -145,9 +158,11 @@ function processSelector(
 	) {
 		return false;
 	}
+
 	if (node.parent && ignoreParents.includes(node.parent.type)) {
 		return false;
 	}
+
 	if (!isResultLike(checker, parserServices, node)) {
 		return false;
 	}
@@ -155,7 +170,11 @@ function processSelector(
 	if (isHandledResult(node)) {
 		return false;
 	}
-	// return getResult()
+
+	if (isValuePropertyAccessed(node)) {
+		return false;
+	}
+
 	if (isReturned(checker, parserServices, node)) {
 		return false;
 	}
@@ -164,28 +183,29 @@ function processSelector(
 	const currentScope = context.getScope();
 
 	// Check if is assigned
-	const references = [];
 	if (assignedTo) {
+		const references = [];
 		for (const scope of [currentScope, ...currentScope.childScopes]) {
 			const variable = scope.set.get(assignedTo.name);
 			references.push(
+				// Don't include the identifier in the assignment
 				...(variable?.references.filter(
 					(ref) => ref.identifier !== assignedTo
 				) ?? [])
 			);
 		}
-	}
 
-	if (references.length > 0) {
-		return references.some((ref) =>
-			processSelector(
-				context,
-				checker,
-				parserServices,
-				ref.identifier,
-				reportAs
-			)
-		);
+		if (references.length > 0) {
+			return references.some((ref) =>
+				processSelector(
+					context,
+					checker,
+					parserServices,
+					ref.identifier,
+					reportAs
+				)
+			);
+		}
 	}
 
 	context.report({
