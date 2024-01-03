@@ -28,7 +28,8 @@ const handledMethods = [
 	'unwrapOr',
 	'_unsafeUnwrap',
 	'unwrap',
-	'isErr'
+	'isErr',
+	'isOk'
 ];
 
 function isResultLike(
