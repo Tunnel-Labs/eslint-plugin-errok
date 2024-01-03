@@ -1,6 +1,6 @@
 {
 	"name": "@tunnel/eslint-plugin-neverthrow",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"description": "",
 	"exports": "./dist/$.js",
 	"prettier": "@tunnel/prettier-config",
