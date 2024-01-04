@@ -28,6 +28,7 @@ const handledMethods = [
 	'unwrapOr',
 	'_unsafeUnwrap',
 	'unwrap',
+	'safeUnwrap',
 	'isErr',
 	'isOk'
 ];
