@@ -221,7 +221,7 @@ const rule: TSESLint.RuleModule<MessageIds, []> = {
 	meta: {
 		docs: {
 			description:
-				'Not handling neverthrow result is a possible error because errors could remain unhandled.',
+				'Not handling a Result type is a possible error because errors could remain unhandled.',
 			recommended: 'strict',
 			url: ''
 		},

@@ -5,8 +5,8 @@ import fs from 'node:fs';
 import { outdent } from 'outdent';
 import path from 'pathe';
 
-const neverthrowTypes = fs.readFileSync(
-	path.join(__dirname, '../fixture/neverthrow.d.ts'),
+const errokTypes = fs.readFileSync(
+	path.join(__dirname, '../fixture/errok.d.ts'),
 	'utf8'
 );
 
@@ -14,7 +14,7 @@ function injectResult(name: string, text: string) {
 	return (
 		outdent({ trimTrailingNewline: false })`
 			// ${name}
-			${neverthrowTypes}
+			${errokTypes}
 			declare function getResult(): Result<string, Error>
 			declare function getResultAsync(): ResultAsync<string, Error>
 			declare function getResultPromise(): Promise<Result<string, Error>>

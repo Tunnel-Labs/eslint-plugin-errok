@@ -40,12 +40,12 @@ devDependencies:
   '@typescript-eslint/utils':
     specifier: ^6.17.0
     version: 6.17.0(eslint@8.56.0)(typescript@5.3.3)
+  errok:
+    specifier: 0.0.1
+    version: 0.0.1
   eslint:
     specifier: ^8.56.0
     version: 8.56.0
-  neverthrow:
-    specifier: 6.1.0
-    version: 6.1.0
   npm-run-all:
     specifier: ^4.1.5
     version: 4.1.5
@@ -1456,6 +1456,10 @@ packages:
       java-properties: 1.0.2
     dev: true
 
+  /errok@0.0.1:
+    resolution: {integrity: sha512-eQzAjh1yZT/NVXNy5CO6JrFAVxpp0revFsVsIKQ4IAwp8kL2pmf8wrR7D99pbcjehBuKPyGIn7RatsmnlgN9Cw==}
+    dev: true
+
   /error-ex@1.3.2:
     resolution: {integrity: sha512-7dFHNmqeFSEt2ZBsCriorKnn3Z2pj+fd9kmI6QoWw4//DL+icEBfc0U7qJCisqrTsKTjw4fNFy2pW9OqStD84g==}
     dependencies:
@@ -2591,10 +2595,6 @@ packages:
 
   /nerf-dart@1.0.0:
     resolution: {integrity: sha512-EZSPZB70jiVsivaBLYDCyntd5eH8NTSMOn3rB+HxwdmKThGELLdYv8qVIMWvZEFy9w8ZZpW9h9OB32l1rGtj7g==}
-    dev: true
-
-  /neverthrow@6.1.0:
-    resolution: {integrity: sha512-xNbNjp/6M5vUV+mststgneJN9eJeJCDSYSBTaf3vxgvcKooP+8L0ATFpM8DGfmH7UWKJeoa24Qi33tBP9Ya3zA==}
     dev: true
 
   /nice-try@1.0.5:

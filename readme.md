@@ -1,13 +1,13 @@
-# @tunnel/eslint-plugin-neverthrow
+# eslint-plugin-errok
 
-This ESLint plugin is a fork of the excellent [eslint-plugin-neverthrow](https://github.com/mdbetancourt/eslint-plugin-neverthrow) package by @mdbetancourt
+This ESLint plugin is based on the excellent [eslint-plugin-neverthrow](https://github.com/mdbetancourt/eslint-plugin-neverthrow) package by [@mdbetancourt](https://github.com/mdbetancourt)
 
 ## Installation
 
-Install `@tunnel/eslint-plugin-neverthrow` using your favorite package manager:
+Install `eslint-plugin-errok` using your favorite package manager:
 
 ```shell
-npm install --save-dev eslint-plugin-neverthrow
+npm install --save-dev eslint-plugin-errok
 ```
 
 ### Requirements
@@ -18,15 +18,15 @@ npm install --save-dev eslint-plugin-neverthrow
 
 ## Usage
 
-Add `@tunnel/neverthrow` to the `plugins` section of your ESLint config file:
+Add `errok` to the `plugins` section of your ESLint config file:
 
 ```js
 // .eslintrc.cjs
 
 module.exports = {
-  plugins: ['@tunnel/neverthrow'],
+  plugins: ['errok'],
   rules: {
-    '@tunnel/neverthrow/must-use-result': 'error',
+    'errok/must-use-result': 'error',
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -42,7 +42,7 @@ See also [Configuring ESLint](https://eslint.org/docs/user-guide/configuring).
 
 ## Configs
 
-- `@tunnel/neverthrow/recommended` ... enables the recommended rules.
+- `errok/recommended` ... enables the recommended rules.
 
 ## Rules
 
@@ -52,6 +52,6 @@ See also [Configuring ESLint](https://eslint.org/docs/user-guide/configuring).
 
 | Rule ID                                                       | Description                                                                                |     |
 | :------------------------------------------------------------ | :----------------------------------------------------------------------------------------- | :-: |
-| [@tunnel/neverthrow/must-use-result](./docs/rules/must-use-result.md) | Not handling neverthrow result is a possible error because errors could remain unhandled. | ⭐️ |
+| [errok/must-use-result](./docs/rules/must-use-result.md) | Not handling errok Result is a possible error because errors could remain unhandled. | ⭐️ |
 
 <!--RULE_TABLE_END-->
