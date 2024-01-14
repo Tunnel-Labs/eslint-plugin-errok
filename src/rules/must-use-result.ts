@@ -26,7 +26,7 @@ const resultProperties = [
 const handledMethods = [
 	'match',
 	'unwrapOr',
-	'_unsafeUnwrap',
+	'unwrapOrThrow',
 	'unwrap',
 	'safeUnwrap',
 	'isErr',

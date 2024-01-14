@@ -204,7 +204,7 @@ interface IResult<T, E> {
 	 *
 	 * @param config
 	 */
-	_unsafeUnwrap(config?: ErrorConfig): T;
+	unwrapOrThrow(config?: ErrorConfig): T;
 	/**
 	 * **This method is unsafe, and should only be used in a test environments**
 	 *
@@ -213,7 +213,7 @@ interface IResult<T, E> {
 	 *
 	 * @param config
 	 */
-	_unsafeUnwrapErr(config?: ErrorConfig): E;
+	unwrapOrThrowErr(config?: ErrorConfig): E;
 }
 declare class Ok<T, E> implements IResult<T, E> {
 	readonly value: T;
@@ -231,9 +231,9 @@ declare class Ok<T, E> implements IResult<T, E> {
 	unwrapOr<A>(_v: A): T | A;
 	match<A>(ok: (t: T) => A, _err: (e: E) => A): A;
 	safeUnwrap(): Generator<Err<never, E>, T>;
-	_unsafeUnwrap(_?: ErrorConfig): T;
+	unwrapOrThrow(_?: ErrorConfig): T;
 unwrap(): T;
-	_unsafeUnwrapErr(config?: ErrorConfig): E;
+	unwrapOrThrowErr(config?: ErrorConfig): E;
 }
 declare class Err<T, E> implements IResult<T, E> {
 	readonly error: E;
@@ -251,8 +251,8 @@ declare class Err<T, E> implements IResult<T, E> {
 	unwrapOr<A>(v: A): T | A;
 	match<A>(_ok: (t: T) => A, err: (e: E) => A): A;
 	safeUnwrap(): Generator<Err<never, E>, T>;
-	_unsafeUnwrap(config?: ErrorConfig): T;
-	_unsafeUnwrapErr(_?: ErrorConfig): E;
+	unwrapOrThrow(config?: ErrorConfig): T;
+	unwrapOrThrowErr(_?: ErrorConfig): E;
 }
 declare const fromThrowable: typeof Result.fromThrowable;
 declare type Prev = [
