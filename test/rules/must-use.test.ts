@@ -15,6 +15,7 @@ function injectResult(name: string, text: string) {
 		outdent({ trimTrailingNewline: false })`
 			// ${name}
 			${errokTypes}
+			declare function myFunction(result: Result<string, Error>): void;
 			declare function getResult(): Result<string, Error>
 			declare function getResultAsync(): ResultAsync<string, Error>
 			declare function getResultPromise(): Promise<Result<string, Error>>
@@ -66,6 +67,12 @@ ruleTester.run('must-use-result', rule, {
 				if (result.isErr()) {
 					result.error
 				}
+			`
+		),		injectResult(
+			'Result: pass to function',
+			outdent`
+				const result = getResult()
+				myFunction(result)
 			`
 		),
 		injectResult(
@@ -176,16 +183,6 @@ ruleTester.run('must-use-result', rule, {
 				'only await call',
 				outdent`
 					await getResult()
-				`
-			),
-			errors: [{ messageId: MessageIds.MUST_USE }]
-		},
-		{
-			code: injectResult(
-				'call external function',
-				outdent`
-					const v = getResult()
-					externalFunction(v)
 				`
 			),
 			errors: [{ messageId: MessageIds.MUST_USE }]

@@ -139,7 +139,8 @@ const ignoreParents = [
 	'ClassDeclaration',
 	'FunctionDeclaration',
 	'MethodDefinition',
-	'ClassProperty'
+	'ClassProperty',
+	'CallExpression'
 ];
 
 function processSelector(
