@@ -246,6 +246,7 @@ const rule: TSESLint.RuleModule<MessageIds, []> = {
 
 		return {
 			[resultSelector](node: TSESTree.Node) {
+				// @ts-expect-error: works at runtime
 				return processSelector(context, checker, parserServices, node);
 			}
 		};
